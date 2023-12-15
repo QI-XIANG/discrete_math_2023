@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>
+        Permutations and Combinations by S. J. Shyu Ver. 0.3 2019/03/08
+    </title>
+    <link href="./src/index.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <script src="./src/index.js"></script>
+    <script src="./src/exercise.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3.0.0/es5/tex-mml-chtml.js"></script>
+</head>
+
+<body>
+
+    <div class="container-fluid mt-3 mb-3">
+        <div class="row">
+            <div class="col-12">
+                <table style="background-color:#c1d1c1;text-align:left;">
+                    <tr>
+                        <td rowspan="3"><img id="myImage"
+                                src="./src/108403523-2.jpg"
+                                style="text-align: center;" width="80" height="110">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td> <b><u>Permutations and Combinations</u></b>
+                            <br><span style="font-size: small;">by Qi Xiang Zhang, qixiang1009@gmail.com, Dec, 2023, Ver.1.0</span>
+                        </td>
+                    </tr>
+                </table>
+                <table>
+                    <tr style="background-color: #cdc;" ;>
+            
+                        <th>Formula</th>
+            
+                        <th><label><i>m</i> = </label>
+                            <input type="number" id="m" value="7" min="0">
+                            <br/>
+                            <label><i>n</i> = </label>
+                            <input type="number" id="n" value="3" min="0">
+                        </th>
+                        <th><button type="button" onclick="computeAll();">Compute All</button></th>
+                        <th>Distinct Objects (m)</th>
+                        <th>Distinct Containers (n)</th>
+                        <th>Some Empty Containers</th>
+                        <th>Interpretation</th>
+                    </tr>
+            
+                    <!--1-->
+                    <tr>
+                        <td><label>$$n^{m}$$</label></td>
+                        <td><span id="result_1"></span></td>
+                        <td><button type="button" onclick="onclick_calculatePermutations()">Compute</button></td>
+                        <td>yes</td>
+                        <td>yes</td>
+                        <td>yes</td>
+                        <td class="text-left">Each of the m distinct object may be distributed into any of the n distinct containers
+                        </td>
+                    </tr>
+            
+                    <!--2-->
+                    <tr>
+                        <td><label>$$n!S(m, n)$$</label></td>
+                        <td><span id="result_2"></span></td>
+                        <td><button type="button" onclick="onclick_calculateOntoFunctions_1();">Compute</button></td>
+                        <td>yes</td>
+                        <td>yes</td>
+                        <td>no</td>
+                        <td class="text-left">Each of the m distinct object may be distributed onto any of the n distinct containers
+                            with no containers empty</td>
+                    </tr>
+            
+                    <!--3-->
+                    <tr>
+                        <td><label>$$S(m, 1)+S(m, 2)+...+S(m, n)$$</label></td>
+                        <td><span id="result_3"></span></td>
+                        <td><button type="button" onclick="onclick_calculateOntoFunctions_2();">Compute</button></td>
+                        <td>yes</td>
+                        <td>no</td>
+                        <td>yes</td>
+                        <td class="text-left">m distinct objects onto 1, 2, ... , n identical containers, leaving no containers
+                            empty S(m, 1) + S(m, 2) + ... + S(m, n)</td>
+                    </tr>
+            
+                    <!--4-->
+                    <tr>
+                        <td><label>$$S(m, n)$$</label></td>
+                        <td><span id="result_4"></span></td>
+                        <td><button type="button" onclick="onclick_calculateOntoFunctions_3();">Compute</button></td>
+                        <td>yes</td>
+                        <td>no</td>
+                        <td>no</td>
+                        <td class="text-left">m distinct objects onto n identical containers, leaving no container empty</td>
+                    </tr>
+            
+                    <!--5-->
+                    <tr>
+                        <td><label>$$\binom{m+n-1}{m}$$</label></td>
+                        <td><span id="result_5"></span></td>
+                        <td><button type="button" onclick="onclick_calculateBinomialCoefficient_1();">Compute</button></td>
+                        <td>no</td>
+                        <td>yes</td>
+                        <td>yes</td>
+                        <td class="text-left">Ordering food from the view of kitcheb (m kids (identical), n foods (distinct)); m
+                            identical pennies into n distinct container; nonnegative integer solutions for an equation</td>
+                    </tr>
+            
+                    <!--6-->
+                    <tr>
+                        <td><label>$$\binom{m-1}{m-n}(=\binom{m-1}{n-1}=\binom{(m-n)-1}{(m-n)})$$</label></td>
+                        <td><span id="result_6"></span></td>
+                        <td><button type="button" onclick="onclick_calculateBinomialCoefficient_2();">Compute</button></td>
+                        <td>no</td>
+                        <td>yes</td>
+                        <td>no</td>
+                        <td class="text-left">Deliver one object to each of the n distinct containers first, then distribute m-n
+                            objects to the n containers</td>
+                    </tr>
+            
+                    <!--7-->
+                    <tr>
+                        <td><label>$$\begin{cases}
+                            p(m) &\text{ for n = m }  \\
+                            p(m,1)+p(m,2)+...+p(m,n)& \text{ for n < m } 
+                          \end{cases}$$</label></td>
+                        <td><span id="result_7"></span></td>
+                        <td><button type="button" onclick="onclick_calculatePartitions_1();">Compute</button></td>
+                        <td>no</td>
+                        <td>no</td>
+                        <td>yes</td>
+                        <td class="text-left">Partition integer m into at most n summands (with some 0 summands, corresponding to
+                            empty containers)</td>
+                    </tr>
+            
+                    <!--8-->
+                    <tr>
+                        <td><label>$$p(m,n)$$</label></td>
+                        <td><span id="result_8"></span></td>
+                        <td><button type="button" onclick="onclick_calculatePartitions_2();">Compute</button></td>
+                        <td>no</td>
+                        <td>no</td>
+                        <td>no</td>
+                        <td class="text-left">Partition integer m into exactly n summands (with no container empty)</td>
+                    </tr>
+            
+                </table>
+            </div>
+        </div>
+    </div>
+    
+</body>
+
+</html>
