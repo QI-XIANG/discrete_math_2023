@@ -3,149 +3,210 @@
 
 <head>
     <title>
-        Permutations and Combinations by S. J. Shyu Ver. 0.3 2019/03/08
+        Permutations and Combinations by Qi Xiang Zhang Ver. 1.0 2023/12/19
     </title>
     <link href="./src/index.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
     <script src="./src/index.js"></script>
-
+    <script src="./src/index2.js"></script>
+    <script src="./src/index3.js"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3.0.0/es5/tex-mml-chtml.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+        crossorigin="anonymous"></script>
 </head>
 
 <body>
-    <table bgcolor="c1d1c1" ; style="text-align:left;">
-        <tr>
-            <td rowspan="3"><img id="myImage"
-                    src="https://drive.google.com/uc?export=download&id=1ovAT5EtPoN1lD4uBxUqW44-_IUGVyabi"
-                    align="center" width="76" height="54">
-            </td>
-        </tr>
-        <tr>
-            <td> <b><u>Permutations and Combinations</u></b> <br>
-                <font size="-1" color="887799"> by Shyong Jian Shyu, sjshyu@gmail.com, Mar, 2019, Ver.0.8
-            </td>
-        </tr>
-    </table>
+    <div class="container-fluid mt-3 mb-3">
+        <div class="row">
+            <div class="col-12">
+                <table style="text-align:left;background-color: #c1d1c1;">
+                    <tr>
+                        <td rowspan="3"><img id="myImage" src="./src/108403523-2.jpg" style="text-align: center;"
+                                width="80" height="110">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td> <b><u>Permutations and Combinations</u></b> <br>
+                            <font size="-1" color="887799"> by Qi Xiang Zhane, qixiang1009@gmail.com, Dec, 2023, Ver.1.0
+                        </td>
+                    </tr>
+                </table>
+
+                <table>
+                    <tr style="background-color: #cdc;" ;>
+
+                        <th>Formula</th>
+
+                        <th><label><i>n</i> = </label>
+                            <input type="number" id="n" value="7" min="0">
+                            <label><i>r</i> = </label>
+                            <input type="number" id="r" value="3" min="0">
+                        </th>
+                        <th><button type="button" onclick="computeAll()">Compute All</button></th>
+                        <th>Order relevant</th>
+                        <th>Repetition</th>
+                        <th>Memo</th>
+                    </tr>
+
+                    <tr>
+                        <td><label>$$P\binom{n}{r} $$</label></td>
+                        <td><span id="resPermutation"></span></td>
+                        <td><button type="button" onclick="clickPerm()">Permutation</button></td>
+                        <td>yes</td>
+                        <td>no</td>
+                        <td class="table-memo" style="text-align: left;"># Permutations of size <i>r</i> from <i>n</i>
+                            distinct objects</td>
+                    </tr>
+
+                    <tr>
+                        <td><label>$$C\binom{n}{r} $$</label></td>
+                        <td><span id="resCombination"></span></td>
+                        <td><button type="button" onclick="clickComb()">Combination</button></td>
+                        <td>no</td>
+                        <td>no</td>
+                        <td style="text-align: left;"># Selections/Combinations of size <i>r</i> from <i>n</i> distinct
+                            objects</td>
+                    </tr>
+
+                    <tr>
+                        <td><label>$$n^{r}$$</label></td>
+                        <td><span id="resArrangement"></span></td>
+                        <td><button type="button" onclick="clickArra()">Arrangement with repetition</button></td>
+                        <td>yes</td>
+                        <td> yes</td>
+                        <td style="text-align: left;"># Arrangements with repetition of size <i>r</i> from <i>n</i>
+                            distinct objects</td>
+                    </tr>
+
+                    <tr>
+                        <td><label>$$C\binom{r+n-1}{r} $$</label></td>
+                        <td><span id="resSelectrofn"></span></td>
+                        <td><button type="button" onclick="clickSele()">Selection with repetition</button></td>
+                        <td> no</td>
+                        <td>yes</td>
+                        <td style="text-align: left;"># Selections with repetition of size <i>r</i> from <i>n</i>
+                            distinct objects</td>
+                    </tr>
+
+                </table>
+
+                <table>
+                    <tr style="background-color: #cdc;" ;>
+
+                        <th>Formula</th>
+
+                        <th><label><i>n</i> = </label>
+                            <input type="number" id="n_2" value="7" min="0">
+                        </th>
+                        <th><button type="button" onclick="computeAll_2();">Compute All</button></th>
+                        <th>Memo</th>
+                    </tr>
+
+                    <!--catlan number-->
+                    <tr>
+                        <td><label>$$C_{n}=\frac{1}{n+1} \binom{2n}{n} $$</label></td>
+                        <td><span id="catlanNumber"></span></td>
+                        <td><button type="button" onclick="onclick_catalanNumber();">Compute</button></td>
+                        <td style="text-align: left;"># The first <i>n</i> Catalan Number with respect to <i>n</i></td>
+                    </tr>
+
+                    <!--triangular number-->
+                    <tr>
+                        <td><label>$$T_{n}=\frac{n\cdot (n+1)}{2}$$</label></td>
+                        <td><span id="triangularNumber"></span></td>
+                        <td><button type="button" onclick="onclick_triangularNumber();">Compute</button></td>
+                        <td style="text-align: left;"># The first <i>n</i> Triangular Number with respect to <i>n</i>
+                        </td>
+                    </tr>
+
+                    <!--harmonic number-->
+                    <tr>
+                        <td><label>$$H_{n}= 1+\frac{1}{2}+\frac{1}{3}+...+\frac{1}{n}$$</label></td>
+                        <td><span id="harmonicNumber"></span></td>
+                        <td><button type="button" onclick="onclick_harmonicNumber();">Compute</button></td>
+                        <td style="text-align: left;"># The first <i>n</i> Harmonic Number with respect to <i>n</i></td>
+                    </tr>
+
+                    <!--fibonacci number-->
+                    <tr>
+                        <td><label>$$F_{n}= F_{n-1}+F_{n-2}$$</label></td>
+                        <td><span id="fibonacciNumber"></span></td>
+                        <td><button type="button" onclick="onclick_fibonacciNumber();">Compute</button></td>
+                        <td style="text-align: left;"># The first <i>n</i> Fibonacci Number with respect to <i>n</i>
+                        </td>
+                    </tr>
+
+                    <!--lucas number-->
+                    <tr>
+                        <td><label>$$L_{n}= L_{n-1}+L_{n-2}$$</label></td>
+                        <td><span id="lucasNumber"></span></td>
+                        <td><button type="button" onclick="onclick_lucasNumber();">Compute</button></td>
+                        <td style="text-align: left;"># The first <i>n</i> Lucas Number with respect to <i>n</i></td>
+                    </tr>
+
+                </table>
+
+                <table>
+                    <tr style="background-color: #cdc;" ;>
+
+                        <th>Formula</th>
+
+                        <th><label><i>m</i> = </label>
+                            <input type="number" id="m" value="7" min="0">
+                            <label><i>k</i> = </label>
+                            <input type="number" id="k" value="3" min="0">
+                        </th>
+                        <th><button type="button" onclick="computeAll_3();">Compute All</button></th>
+                        <th>Memo</th>
+                    </tr>
+
+                    <!--catlan number-->
+                    <tr>
+                        <td><label>$$a_{m,k} = (-1)^{m-k} \sum_{j=0}^{k} (-1)^j \binom{m+1}{j} (k-j)^m$$</label></td>
+                        <td><span id="eulerian_number"></span></td>
+                        <td><button type="button" onclick="onclick_eulerianNumber();">Compute</button></td>
+                        <td style="text-align: left;"># The Eulerian Number with respect to <i>m</i> and <i>k</i></td>
+                    </tr>
 
 
-
-    <table>
-        <tr style="background-color: #cdc;" ;>
-
-            <th>Formula</th>
-
-            <th><label><i>n</i> = </label>
-                <input type="number" id="n" value="7" min="0">
-                <label><i>r</i> = </label>
-                <input type="number" id="r" value="3" min="0">
-            </th>
-
-            <th><button type="button" onclick="computeAll()">Compute All</button></th>
-
-            <th>Order relevant</th>
-
-            <th>Repetition</th>
-
-            <th>Memo</th>
-
-        </tr>
+                </table>
 
 
+                <table>
+                    <tr style="background-color: #cdc;" ;>
 
-        <tr>
-            <td>
-                <label><i>P</i>(<i>n</i>, <i>r</i>)</label>
-            </td>
-            <td><span id="resPermutation"></span></td>
-            <td><button type="button" onclick="clickPerm()">Permutation</button></td>
-            <td>yes</td>
-            <td>no</td>
-            <td class="table-memo" style="text-align: left;"># Permutations of size <i>r</i> from <i>n</i> distinct
-                objects</td>
-        </tr>
+                        <th>Formula</th>
 
-        <tr>
-            <td>
-                <label><i>C</i>(<i>n</i>, <i>r</i>)</label>
-            </td>
-            <td>
-                <span id="resCombination"></span>
-            </td>
+                        <th><label><i>m</i> = </label>
+                            <input type="number" id="m_1" value="5" min="0">
+                            <label><i>n</i> = </label>
+                            <input type="number" id="n_1" value="2" min="0">
+                        </th>
+                        <th><button type="button" onclick="computeAll_4();">Compute All</button></th>
+                        <th>Memo</th>
+                    </tr>
 
-            <td>
-                <button type="button" onclick="clickComb()">Combination</button>
+                    <!--catlan number-->
+                    <tr>
+                        <td><label>$$S(m, n) =
+                                \begin{cases}
+                                1 & \text{if } m = n = 0 \\
+                                0 & \text{if } n > m \\
+                                S(m-1, n-1) + n \cdot S(m-1, n) & \text{otherwise}
+                                \end{cases}$$</label></td>
+                        <td><span id="stirlingNumberSecondKind_1"></span></td>
+                        <td><button type="button" onclick="onclick_stirlingNumberSecondKind();">Compute</button></td>
+                        <td style="text-align: left;"># The Stirling Number of the second kind with respect to <i>m</i> and <i>n</i></td>
+                    </tr>
 
-            </td>
 
-            <td>
-                no
-            </td>
+                </table>
+            </div>
+        </div>
+    </div>
 
-            <td>
-                no
-            </td>
-
-            <td style="text-align: left;">
-                # Selections/Combinations of size <i>r</i> from <i>n</i> distinct objects
-            </td>
-
-        </tr>
-
-        <tr>
-
-            <td>
-                <label><i>n<sup>r</sup></i></label>
-            </td>
-
-            <td>
-                <span id="resArrangement"></span>
-            </td>
-
-            <td>
-                <button type="button" onclick="clickArra()">Arrangement with repetition</button>
-            </td>
-
-            <td>
-                yes
-            </td>
-
-            <td>
-                yes
-
-            </td>
-
-            <td style="text-align: left;">
-                # Arrangements with repetition of size <i>r</i> from <i>n</i> distinct objects
-            </td>
-
-        </tr>
-
-        <tr>
-            <td>
-                <label><i>C</i>(<i>r</i>+<i>n</i>-1, <i>r</i>)</label>
-            </td>
-
-            <td>
-                <span id="resSelectrofn"></span>
-            </td>
-
-            <td>
-                <button type="button" onclick="clickSele()">Selection with repetition</button>
-            </td>
-
-            <td>
-                no
-            </td>
-
-            <td>
-                yes
-            </td>
-
-            <td style="text-align: left;">
-                # Selections with repetition of size <i>r</i> from <i>n</i> distinct objects
-            </td>
-
-        </tr>
-
-    </table>
 </body>
 
 </html>
